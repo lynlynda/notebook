@@ -54,17 +54,19 @@
 	```
 	<p>内容内容</p>
 	```
-* ### **css中使用**：  
-```
-.container{
-  w + tab   ==> width: 
-  bt        ==> border-bottom:
-  m10 		==> margin: 10px;
-  m10-20 	==> margin: 10px 20px;
-  bdrs10 	==> border-radius: 10px;
-  df		==> display: flex
-}
-```
+* ### **css中使用**： 
+ 
+	```
+	.container{
+	  w + tab   ==> width: 
+	  bt        ==> border-bottom:
+	  m10 		==> margin: 10px;
+	  m10-20 	==> margin: 10px 20px;
+	  bdrs10 	==> border-radius: 10px;
+	  df		==> display: flex
+	}
+	```
+	
 * ### **注意事项**：  
  1. 书写时不能加空格
  2. 光标需要定位在末尾
