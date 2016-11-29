@@ -15,21 +15,7 @@ vue-async-data异步操作的库
 react
 
 
-17，webstorm 和emmet
 
-emmet：
-
-html中生成很多无意义的补全文字：
-
-输入 lorem5  加tab即可。数字表示单词个数
-
-标签嵌套： >  +   ^  *   ( )
-
-属性 ：#   .   [ ]
-
-数字递加：$    ul>li.item$*5
-
-标签内文本：{    }
 
 
 # markdown文件编写
