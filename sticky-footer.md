@@ -18,7 +18,7 @@
 }
 
 .detail-main{
-	padding-top: 64px ;
+   padding-top: 64px ;
    padding-bottom: 64px;
 }
       
