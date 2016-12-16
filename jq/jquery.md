@@ -184,5 +184,40 @@ function add(a,b){
 　　function add3(a,b){return add2(a,b);}
 　　function add2(a,b){return add1(a,b);}
 　　function add1(a,b){return add(a,b);}  
-  ```
+  ```  
+  
+### $.noConflict()  
+```  
+var $ = 123;   
+var gaolin = $.noConflict();  
+gaolin(function(){  
+	alert($); // 123  
+})   
 
+var jQuery = 456;   
+var gaolin = $.noConflict(true);  
+gaolin(function(){  
+	alert(jQuery); // 456  
+})  
+```
+### $.Callbacks  
+```  
+var list = $.Callbacks();  
+  
+list.add(function(){console.log(1)});
+list.add(function(){console.log(2)});
+list.add(function(){console.log(3)});
+list.add(function(){console.log(4)});  
+   
+list.fire(); // 1,2,3,4  
+```  
+### 判断数据类型  ({}.toString.call())
+```
+var a = 'string';// a=1,a={},a=[]  
+alert({}.toString.call(a)) //string,number,object,array  
+```  
+
+### 一般情况下判断相等都要用 ===  
+只有以下两种情况用 == ：  
+1. null == null  //true  
+2. null == undefined // true
