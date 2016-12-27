@@ -200,7 +200,7 @@ gaolin(function(){
 	alert(jQuery); // 456  
 })  
 ```
-### $.Callbacks  
+### $.Callbacks
 ```  
 var list = $.Callbacks();  
   
@@ -210,7 +210,69 @@ list.add(function(){console.log(3)});
 list.add(function(){console.log(4)});  
    
 list.fire(); // 1,2,3,4  
+```    
+可以对不同作用域的函数进行统一管理  
+  
 ```  
+var cbs = $.Callbacks();    
+function aaa(){  
+	alert(1);
+}   
+cbs.add(aaa);  
+(function(){  
+ 	function bbb(){  
+ 		alert(2)
+ 	}   
+ 	cbs.add(bbb); 
+ 	
+ })()   
+ cbs.fire();// 1, 2
+```  
+### $.Defferred()  
+
+- 以下执行结果相同  
+
+```  
+var cb = $Callbacks();  
+setTimeout(function(){   
+	alert(1);   
+	cd.fire()  
+},1000);   
+cb.add(function(){  
+	alert(222)  
+})  
+
+
+var dfd = $Defferred();  
+setTimeout(function(){   
+	alert(1);   
+	dfd.resolve()  
+},1000);   
+dfd.done(function(){  
+	alert(222)  
+})    
+```  
+  
+- 第一次延迟执行，接下来都将立即执行的时候用下面方法：  
+  
+```    
+var dfd = $.Deferred();  
+setTimeout(function(){  
+	alert(111);  
+	dfd.resolve();
+},1000);   
+ 
+dfd.done(function(){  
+	alert('第一次延迟一秒执行');
+});  
+  
+$('input').click(function(){  
+	dfd.done(function(){  
+		alert('以后都立即执行');
+	})
+})
+```
+
 ### 判断数据类型  ({}.toString.call())
 ```
 var a = 'string';// a=1,a={},a=[]  
@@ -221,3 +283,18 @@ alert({}.toString.call(a)) //string,number,object,array
 只有以下两种情况用 == ：  
 1. null == null  //true  
 2. null == undefined // true
+
+
+### !!   
+!!是类型转换  将对应的类型转换为boolean型
+### jQ可以获取display:none元素的属性，但是原生的js不可以  
+  
+```  
+$('#div1').width() // 100  
+$('#div1').get(0).offsetWidth  // 0   
+
+<div id="div1" style="width:100px; height:100px; display:none"></div>  
+ 
+```  
+jq将“display:none”存起来，然后添加“display:block; visibiliti:hidden; position:absolute”，之后获取宽度值并保存，然后将样式再改成原始的“display:none”
+  
