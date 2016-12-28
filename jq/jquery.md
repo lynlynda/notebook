@@ -271,6 +271,26 @@ $('input').click(function(){
 		alert('以后都立即执行');
 	})
 })
+```  
+- $.when  
+针对多个延迟对象  
+  
+```  
+function aaa(){  
+	var dfd = $.Deferred();  
+	dfd.resolve();  
+	return dfd;
+}  
+function bbb(){  
+	var dfd = $.Deferred();  
+	dfd.resolve();  
+	return dfd;
+}  
+$.when(aaa(), bbb()).done(function(){  
+	alert('a,b都成功了')//aaa,bbb都成功才执行done
+}).fail(function(){  
+	alert('a或者b失败')// aaa,或者bbb有一个失败就执行fail
+})    
 ```
 
 ### 判断数据类型  ({}.toString.call())
@@ -296,5 +316,8 @@ $('#div1').get(0).offsetWidth  // 0
 <div id="div1" style="width:100px; height:100px; display:none"></div>  
  
 ```  
-jq将“display:none”存起来，然后添加“display:block; visibiliti:hidden; position:absolute”，之后获取宽度值并保存，然后将样式再改成原始的“display:none”
+jq将“display:none”存起来，然后添加“display:block; visibiliti:hidden; position:absolute”，之后获取宽度值并保存，然后将样式再改成原始的“display:none”  
+
+### $.data  
+
   
