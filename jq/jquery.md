@@ -318,6 +318,64 @@ $('#div1').get(0).offsetWidth  // 0
 ```  
 jq将“display:none”存起来，然后添加“display:block; visibiliti:hidden; position:absolute”，之后获取宽度值并保存，然后将样式再改成原始的“display:none”  
 
-### $.data  
+### $.data   .attr   .prop 
+```   
+$('#div1').attr('name', 'hello');
+alert($('#div1').attr('name')); // hello   
+ 
+//相当于原生中的  setAttribute，getAttribute：
+document.getElementById('div1').setAttribute('name', 'hello');  
+alert(document.getElementById('div1').getAttribute('name'));  //hello  
+
+----------------------------------------------  
+
+$('#div1').prop('name', 'hello');
+alert($('#div1').prop('name')); // hello   
+
+//相当于原生中的：
+document.getElementById('div1').['name'] = 'hello';  
+alert(document.getElementById('div1').['name']);  //hello  
+
+----------------------------------------------    
+ 
+$('#div1').data('name', 'hello');
+alert($('#div1').data('name')); // hello     
+ 
+```  
+- 内存泄漏产生的情况之一是 ：DOM元素和对象之间互相引用，大部分浏览器就会出现内存泄漏  
+如果出现以下情况：浏览器就会出现内存泄漏  
+
+	```  
+	var oDiv = document.getElementById('div1');  
+	var obj = {};  
+	oDiv.name = obj;  
+	obj.age = oDiv;  
+  
+	```  
+
+  $.data可以解决以上问题:  
+    
+  ```  
+  $('#div1').data('name', obj);  
+  ```  
+     
+  此时不管name设置的是不是对象，或者obj是不是引用了 $('#div1')这个元素，都不会发生内存泄漏  
+    
+### Object.defindeProperty()  
+```  
+var obj = { name : 'hello'};  
+Object.defindeProperty(obj, 0, {  
+	get: function() {  
+		return {};
+	}
+});  
+//相当于 var obj = { name : 'hello', 0 : {}}; 不设置set方法则其对应属性不可以被修改  
+
+
+alert(obj[0]);  //[object Object]
+obj[0] = 123;  
+alert(obj[0]);  //[object Object]
+ 
+
 
   
