@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>demo</title>
+  <script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+  <div id="d1" gaolin='hao'></div>
+  <script type="text/javascript">
+    $(function(){
+      $('#d1').removeAttr('gaolin');
+      alert($('#d1').attr('gaolin'));
+
+
+
+       // alert($('#d1').prop('gaolin'));
+
+      
+    })
+  </script>
+</body>
+</html>

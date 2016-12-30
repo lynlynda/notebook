@@ -318,7 +318,7 @@ $('#div1').get(0).offsetWidth  // 0
 ```  
 jq将“display:none”存起来，然后添加“display:block; visibiliti:hidden; position:absolute”，之后获取宽度值并保存，然后将样式再改成原始的“display:none”  
 
-### $.data   .attr   .prop 
+### $.data 
 ```   
 $('#div1').attr('name', 'hello');
 alert($('#div1').attr('name')); // hello   
@@ -374,8 +374,92 @@ Object.defindeProperty(obj, 0, {
 
 alert(obj[0]);  //[object Object]
 obj[0] = 123;  
-alert(obj[0]);  //[object Object]
+alert(obj[0]);  //[object Object]  
+``` 
+  
+### $.queue   
+- 针对animation  
+- 针对多异步的顺序管理，比 $.deferred 更强大  
+    
+###  .attr 与.prop 区别与联系 
+```   
+$('#div1').attr('name', 'hello');
+alert($('#div1').attr('name')); // hello   
  
+//相当于原生中的  setAttribute，getAttribute：
+document.getElementById('div1').setAttribute('name', 'hello');  
+alert(document.getElementById('div1').getAttribute('name'));  //hello  
+
+----------------------------------------------  
+
+$('#div1').prop('name', 'hello');
+alert($('#div1').prop('name')); // hello   
+
+//相当于原生中的：
+document.getElementById('div1').['name'] = 'hello';  
+alert(document.getElementById('div1').['name']);  //hello  
+
+```  
+- 区别一：.prop定义的自定义属性 ，无法在标签中显示出来，但是确实已经定义了，可以获取到 
+  
+```   
+$('#d1').attr('gaolin', 'hao');   
+//<div id="d1" gaolin="hao"></div>   
+   
+$('#d1').prop('gaolin', 'hao');     
+//<div id="d1"></div>  
+alert($('#d1').prop('gaolin')); //hao  
+ 
+```    
+- 区别二： .prop无法获取自定义属性  
+   
+```   
+ <div id="d1" gaolin="hao"></div>   
+ $('#d1').attr('gaolin') //hao  
+ $('#d1').prop('gaolin') //空无结果  
+  
+```   
+- 区别三： 针对a标签的表现   
+ 
+```  
+<a href="haha.com"></a>   
+$('a').attr('href') // haha.com  
+$('a').prop('href') // 返回本地的全路径，如：file:///E/asdfsafsdf/haha.com  
+```  
+- 区别四：  
+  
+```  
+<input type="checkbox"/>  
+
+alert( $('input').attr('checked') )  //checked  
+alert( $('input').prop('checked') )  // true  
+
+```
+
+在jq中已经为类似属性做了兼容，如一下这两种都可以实现功能：  
+  
+```  
+$('input').attr('checked', 'true')   
+$('input').attr('checked', 'checked')  
+  
+```   
+### .addClass  
+  
+```    
+$('div').addClass(function(index){
+	return 'div'+index;
+}) 
+
+
+<div class="div0"></div>  
+<div class="div1"></div> 
+<div class="div2"></div> 
+```  
+### &&比||的优先级高   
+alert(1 || 0 && 2) // 1  先执行 0&&2  再执行 1||0
+   
+
+
 
 
   
